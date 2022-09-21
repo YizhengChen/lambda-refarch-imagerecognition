@@ -31,7 +31,8 @@ frontend:
     preBuild:
       commands:
         - cd src/react-frontend
-        - npm install -g npm
+        - npm install npm -g
+        - npx browserslist@latest --update-db
         - npm install
     build:
       commands:
