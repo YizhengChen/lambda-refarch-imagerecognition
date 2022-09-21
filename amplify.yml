@@ -32,6 +32,7 @@ frontend:
       commands:
         - cd src/react-frontend
         - npm install -g npm
+        - npm install
     build:
       commands:
         - npm run build
