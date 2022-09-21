@@ -31,7 +31,7 @@ frontend:
     preBuild:
       commands:
         - cd src/react-frontend
-        - npm install
+        - npm install -g npm
     build:
       commands:
         - npm run build
