@@ -32,10 +32,10 @@ frontend:
       commands:
         - cd src/react-frontend
         - npm install npm -g
-        - npx browserslist@latest --update-db
         - npm install
     build:
       commands:
+        - npx browserslist@latest --update-db
         - npm run build
   artifacts:
     baseDirectory: src/react-frontend/build
