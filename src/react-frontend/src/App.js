@@ -16,7 +16,7 @@ import { Grid, Header, Menu } from 'semantic-ui-react';
 
 import '@aws-amplify/ui-react/styles.css';
 
-import { BrowserRouter as Router, NavLink, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, NavLink, Route } from 'react-router-dom';
 
 import { AlbumList, NewAlbum } from './components/Album';
 import { AlbumDetails } from "./components/AlbumDetail";
@@ -48,12 +48,13 @@ function App() {
 
 			<Grid padded>
 				<Grid.Column>
-
+					<Routes>
 					<Route path="/" exact component={NewAlbum} />
 					<Route path="/" exact component={() => !Auth.currentAuthenticatedUser() ? null : <AlbumList />} />
 					<Route
 						path="/albums/:albumId"
 						render={props => <AlbumDetails id={props.match.params.albumId} />} />
+					</Routes>
 				</Grid.Column>
 			</Grid>
 
