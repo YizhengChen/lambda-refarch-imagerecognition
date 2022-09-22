@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {S3Image} from 'aws-amplify-react'
+import { AmplifyS3Image } from '@aws-amplify/ui-react/legacy'
 
 import {Card, Label, Divider, Form, Dimmer, Loader, Message} from 'semantic-ui-react'
 
@@ -173,7 +173,7 @@ export const PhotoList = React.memo(props => {
         return (
           <Card key={photo.id}>
             <Card.Content textAlign="center">
-              <S3Image
+              <AmplifyS3Image
                 key={photo.id}
                 imgKey={'resized/' + photo.thumbnail.key.replace(/.+resized\//, '')}
                 level="private"
