@@ -33,9 +33,9 @@ frontend:
         - cd src/react-frontend
         - npm install npm -g
         - npm install
+        - npm audit fix
     build:
       commands:
-        - npx browserslist@latest --update-db
         - npm run build
   artifacts:
     baseDirectory: src/react-frontend/build
