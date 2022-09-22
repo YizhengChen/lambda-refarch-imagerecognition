@@ -11,55 +11,53 @@ import Amplify, { Auth } from 'aws-amplify';
 import aws_exports from './aws-exports';
 
 //import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
-import { Authenticator } from '@aws-amplify/ui-react';
+import { withAuthenticator } from '@aws-amplify/ui-react';
 import { Grid, Header, Menu } from 'semantic-ui-react';
 
 import '@aws-amplify/ui-react/styles.css';
 
-import { BrowserRouter as Router, Routes, NavLink, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, NavLink, Route, useParams} from 'react-router-dom';
 
 import { AlbumList, NewAlbum } from './components/Album';
 import { AlbumDetails } from "./components/AlbumDetail";
 
 Amplify.configure(aws_exports);
 
-export default function App() {
+function App({ signOut, user }) {
 	return (
-
 		<Router>
 			<Menu inverted attached>
 				<Menu.Item
 					name='home'>
 					<NavLink to='/'><Header color="yellow">Albums</Header></NavLink>
 				</Menu.Item>
+				<Menu.Item
+					name='myalbums'>
+					<NavLink to='/albums'><Header color="yellow">MyAlbums</Header></NavLink>
+				</Menu.Item>
 				<Menu.Menu position='right'>
 					<Menu.Item>
-						<Authenticator>
-                              {({ signOut, user }) => (
-                                <main>
-                                  <h1>Hello {user.username}</h1>
-                                  <button onClick={signOut}>Sign out</button>
-                                </main>
-                              )}
-                        </Authenticator>
+						<>
+							<main>
+							  <h1>Hello {user.username}</h1>
+							  <button onClick={signOut}>Sign out</button>
+							</main>
+						</>
 					</Menu.Item>
 				</Menu.Menu>
 			</Menu>
 
-			<Grid padded>
-				<Grid.Column>
-					<Routes>
-					<Route path="/" exact component={NewAlbum} />
-					<Route path="/" exact component={() => !Auth.currentAuthenticatedUser() ? null : <AlbumList />} />
-					<Route
-						path="/albums/:albumId"
-						render={props => <AlbumDetails id={props.match.params.albumId} />} />
-					</Routes>
-				</Grid.Column>
-			</Grid>
-
+			<Routes>
+				<Route path="/"  element={<NewAlbum/>} />
+				<Route path="/albums" element={<AlbumList/>} />
+				<Route path="/albums/:albumId" element={<OpenAlbum/>} />
+			</Routes>
 		</Router>
-
 	);
 }
+export default withAuthenticator(App);
 
+function OpenAlbum() {
+  let params = useParams();
+  return <AlbumDetails id={params.albumId} />;
+}
