@@ -10,19 +10,20 @@ import React from 'react';
 import Amplify, { Auth } from 'aws-amplify';
 import aws_exports from './aws-exports';
 
-import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
-import { Grid, Header, Menu } from 'semantic-ui-react'
+//import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
+import { Authenticator } from '@aws-amplify/ui-react';
+import { Grid, Header, Menu } from 'semantic-ui-react';
 
-import '@aws-amplify/ui/dist/style.css';
+import '@aws-amplify/ui-react/styles.css';
 
 import { BrowserRouter as Router, NavLink, Route } from 'react-router-dom';
 
-import { AlbumList, NewAlbum } from './components/Album'
+import { AlbumList, NewAlbum } from './components/Album';
 import { AlbumDetails } from "./components/AlbumDetail";
 
 Amplify.configure(aws_exports);
 
-function App() {
+export default function App() {
 	return (
 
 		<Router>
@@ -33,7 +34,14 @@ function App() {
 				</Menu.Item>
 				<Menu.Menu position='right'>
 					<Menu.Item>
-						<AmplifySignOut />
+						<Authenticator>
+                              {({ signOut, user }) => (
+                                <main>
+                                  <h1>Hello {user.username}</h1>
+                                  <button onClick={signOut}>Sign out</button>
+                                </main>
+                              )}
+                        </Authenticator>
 					</Menu.Item>
 				</Menu.Menu>
 			</Menu>
@@ -54,4 +62,4 @@ function App() {
 	);
 }
 
-export default withAuthenticator(App);
+
