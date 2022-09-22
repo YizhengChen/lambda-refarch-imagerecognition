@@ -24,7 +24,7 @@ backend:
         - export PHOTO_BUCKET=$(jq -r '.storage[(.storage | keys)[0]].output.BucketName' ./amplify/#current-cloud-backend/amplify-meta.json)
         ##
         # Deploy SAM based back-end
-        ###
+        ##
         - make deploy
 frontend:
   phases:
@@ -43,5 +43,5 @@ frontend:
       - "**/*"
   cache:
     paths:
-      - node_modules/**/*
+      - node_modules/**/*np
       - src/react-frontend/node_modules/**/*
