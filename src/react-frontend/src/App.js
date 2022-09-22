@@ -11,7 +11,7 @@ import Amplify, { Auth } from 'aws-amplify';
 import aws_exports from './aws-exports';
 
 //import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
-import { Authenticator,useAuthenticator } from '@aws-amplify/ui-react';
+import { Authenticator } from '@aws-amplify/ui-react';
 import { Grid, Header, Menu } from 'semantic-ui-react';
 
 import '@aws-amplify/ui-react/styles.css';
