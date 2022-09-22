@@ -23,7 +23,7 @@ import { AlbumDetails } from "./components/AlbumDetail";
 
 Amplify.configure(aws_exports);
 
-function App() {
+export default function App() {
 	return (
 
 		<Router>
@@ -62,6 +62,4 @@ function App() {
 
 	);
 }
-
-export default useAuthenticator(App)
 
